@@ -1,6 +1,8 @@
 const colorEl = document.getElementById('color');
 const getColorsBtn = document.getElementById('get-color-scheme');
-const schemeSelectEl = document.getElementById('color-scheme')
+const schemeSelectEl = document.getElementById('scheme-select');
+const colorsContainer = document.getElementById('scheme-colors');
+const schemeFooterEl = document.getElementById('scheme-footer');
 
 async function fetchColorScheme(hexValue, mode) {
     try {
@@ -17,13 +19,23 @@ async function fetchColorScheme(hexValue, mode) {
     }
 
 }
-getColorsBtn.addEventListener('click', () => {
+getColorsBtn.addEventListener('click', async () => {
     const selectedValue = schemeSelectEl.value;
     const colorValue = colorEl.value;
-    const colorsArray = fetchColorScheme(colorValue.slice(1), selectedValue)
+    const colorsArray = await fetchColorScheme(colorValue.slice(1), selectedValue)
     render(colorsArray)
 })
 
 
 
+function render(colors) {
+    let colorsHtml = ''
+    let hexHtml = ''
+    for (let color of colors) {
+        colorsHtml += `<div class="color" style="background-color: ${color};"></div>`
+        hexHtml += `<h3>${color}</h3>`
+    }
+    colorsContainer.innerHTML = colorsHtml;
+    schemeFooterEl.innerHTML = hexHtml;
 
+}
