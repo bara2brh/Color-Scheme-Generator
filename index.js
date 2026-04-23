@@ -37,5 +37,8 @@ function render(colors) {
     }
     colorsContainer.innerHTML = colorsHtml;
     schemeFooterEl.innerHTML = hexHtml;
+    document.querySelector('.first').style.background=colors[0]
+    document.querySelector('.second').style.background=colors[1]
+    document.querySelector('.third').style.background=colors[2]
 
 }
